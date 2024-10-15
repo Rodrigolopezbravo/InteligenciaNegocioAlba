@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{4B680930-E5A9-481C-A42F-CDFFF46250BC}">
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{CFE3A3CA-A334-4508-85AB-4783D47CD67C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -33,6 +33,18 @@
       DTS:CreationName="OLEDB"
       DTS:DTSID="{15C667C3-2081-4CEC-9ADF-3C8387FF7FB7}"
       DTS:ObjectName="localhost.DimAlbarran">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DimAlbarran;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.DimAlbarran 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2C660CEF-83C4-419B-B4CC-F9992F3B2C3F}"
+      DTS:ObjectName="localhost.DimAlbarran 1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
@@ -1387,6 +1399,1226 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\ETL DimEmpleado"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{1C61EBE0-A69A-4CD7-B3C2-E1E45F6B638A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL DimEmpleado"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ETL DimEmpleado\Combinación de mezcla"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="Combinación de mezcla"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[empleado_id]"
+                      cachedDataType="i4"
+                      cachedName="empleado_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[empleado_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[cargo_id]"
+                      cachedDataType="i4"
+                      cachedName="cargo_id"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[cargo_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="nombre"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[fecha_contrato]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha_contrato"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[fecha_contrato]" />
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[sueldo_base]"
+                      cachedDataType="i4"
+                      cachedName="sueldo_base"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[sueldo_base]" />
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[NombreEmpleado]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NombreEmpleado"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[NombreEmpleado]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[EmpleadoID]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[EmpleadoID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cargo_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cargo_id]"
+                      name="cargo_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[cargo_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[nombre]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[nombre]"
+                      name="nombre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[nombre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[empleado_id]"
+                      name="empleado_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[empleado_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha_contrato]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha_contrato]"
+                      name="fecha_contrato">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[fecha_contrato]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[sueldo_base]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[sueldo_base]"
+                      name="sueldo_base">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[sueldo_base]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[NombreEmpleado]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[NombreEmpleado]"
+                      name="NombreEmpleado">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[NombreEmpleado]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[EmpleadoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[EmpleadoID]"
+                      name="EmpleadoID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[EmpleadoID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimEmpleado\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[DimEmpleado]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimEmpleado\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[fecha_contrato]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha_contrato"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha_Contrato]"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha_contrato]" />
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[NombreEmpleado]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NombreEmpleado"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombreEmpleado]"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[NombreEmpleado]" />
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[EmpleadoID]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoID"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[EmpleadoID]"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[EmpleadoID]" />
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="nombre"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cargo]"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[nombre]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[EmpleadoID]"
+                      dataType="i4"
+                      name="EmpleadoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombreEmpleado]"
+                      dataType="wstr"
+                      length="255"
+                      name="NombreEmpleado" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Cargo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha_Contrato]"
+                      dataType="dbTimeStamp"
+                      name="Fecha_Contrato" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimEmpleado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimEmpleado\DimEmpleados"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="DimEmpleados"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[DimEmpleado]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimEmpleado\DimEmpleados.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[EmpleadoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].ExternalColumns[EmpleadoID]"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[EmpleadoID]"
+                      name="EmpleadoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[NombreEmpleado]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreEmpleado]"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[NombreEmpleado]"
+                      name="NombreEmpleado"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[Cargo]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].ExternalColumns[Cargo]"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[Cargo]"
+                      name="Cargo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[Fecha_Contrato]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha_Contrato]"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[Fecha_Contrato]"
+                      name="Fecha_Contrato"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].ExternalColumns[EmpleadoID]"
+                      dataType="i4"
+                      name="EmpleadoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreEmpleado]"
+                      dataType="wstr"
+                      length="255"
+                      name="NombreEmpleado" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].ExternalColumns[Cargo]"
+                      dataType="wstr"
+                      length="255"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha_Contrato]"
+                      dataType="dbTimeStamp"
+                      name="Fecha_Contrato" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[EmpleadoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[EmpleadoID]"
+                      name="EmpleadoID" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[NombreEmpleado]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[NombreEmpleado]"
+                      name="NombreEmpleado" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[Cargo]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[Cargo]"
+                      name="Cargo" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[Fecha_Contrato]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[Fecha_Contrato]"
+                      name="Fecha_Contrato" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimEmpleado\División condicional"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="División condicional"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL DimEmpleado\División condicional.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\División condicional.Inputs[Entrada de división condicional].Columns[EmpleadoID]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoID"
+                      lineageId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[EmpleadoID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimEmpleado\División condicional.Outputs[Insertar nuevo empleado]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Insertar nuevo empleado"
+                  synchronousInputId="Package\ETL DimEmpleado\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">[ISNULL](#{Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[EmpleadoID]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(EmpleadoID)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL DimEmpleado\División condicional.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\ETL DimEmpleado\División condicional.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL DimEmpleado\División condicional.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\ETL DimEmpleado\División condicional.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimEmpleado\Empleados"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Empleados"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[cargos]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT        cargos.cargo_id, cargos.nombre, empleados.empleado_id, empleados.nombre AS NombreEmpleado, empleados.fecha_contrato, empleados.sueldo_base
+FROM            cargos INNER JOIN
+                         empleados ON cargos.cargo_id = empleados.cargo_id</property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimEmpleado\Empleados.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.Albarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[cargo_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[cargo_id]"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[cargo_id]"
+                      name="cargo_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[nombre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[nombre]"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[nombre]"
+                      name="nombre"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[empleado_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[empleado_id]"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[empleado_id]"
+                      name="empleado_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[fecha_contrato]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[fecha_contrato]"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[fecha_contrato]"
+                      name="fecha_contrato"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[sueldo_base]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[sueldo_base]"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[sueldo_base]"
+                      name="sueldo_base"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[NombreEmpleado]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreEmpleado]"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[NombreEmpleado]"
+                      name="NombreEmpleado"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[cargo_id]"
+                      dataType="i4"
+                      name="cargo_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[nombre]"
+                      dataType="wstr"
+                      length="255"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[empleado_id]"
+                      dataType="i4"
+                      name="empleado_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[fecha_contrato]"
+                      dataType="dbTimeStamp"
+                      name="fecha_contrato" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[sueldo_base]"
+                      dataType="i4"
+                      name="sueldo_base" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreEmpleado]"
+                      dataType="wstr"
+                      length="255"
+                      name="NombreEmpleado" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[cargo_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[cargo_id]"
+                      name="cargo_id" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[nombre]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[empleado_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[empleado_id]"
+                      name="empleado_id" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[NombreEmpleado]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[NombreEmpleado]"
+                      name="NombreEmpleado" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[fecha_contrato]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[fecha_contrato]"
+                      name="fecha_contrato" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[sueldo_base]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[sueldo_base]"
+                      name="sueldo_base" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimEmpleado\Ordenar"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimEmpleado\Ordenar.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Inputs[Entrada de ordenación].Columns[cargo_id]"
+                      cachedDataType="i4"
+                      cachedName="cargo_id"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[cargo_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Inputs[Entrada de ordenación].Columns[nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="nombre"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[nombre]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Inputs[Entrada de ordenación].Columns[empleado_id]"
+                      cachedDataType="i4"
+                      cachedName="empleado_id"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[empleado_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Inputs[Entrada de ordenación].Columns[fecha_contrato]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha_contrato"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[fecha_contrato]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Inputs[Entrada de ordenación].Columns[sueldo_base]"
+                      cachedDataType="i4"
+                      cachedName="sueldo_base"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[sueldo_base]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Inputs[Entrada de ordenación].Columns[NombreEmpleado]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NombreEmpleado"
+                      lineageId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[NombreEmpleado]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[cargo_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[cargo_id]"
+                      name="cargo_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[cargo_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[nombre]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[nombre]"
+                      name="nombre">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[nombre]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[empleado_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[empleado_id]"
+                      name="empleado_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[empleado_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[fecha_contrato]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[fecha_contrato]"
+                      name="fecha_contrato">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[fecha_contrato]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[sueldo_base]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[sueldo_base]"
+                      name="sueldo_base">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[sueldo_base]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[NombreEmpleado]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación].Columns[NombreEmpleado]"
+                      name="NombreEmpleado">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB].Columns[NombreEmpleado]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimEmpleado\Ordenar 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimEmpleado\Ordenar 1.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar 1.Inputs[Entrada de ordenación].Columns[EmpleadoID]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoID"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[EmpleadoID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar 1.Inputs[Entrada de ordenación].Columns[NombreEmpleado]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="NombreEmpleado"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[NombreEmpleado]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar 1.Inputs[Entrada de ordenación].Columns[Cargo]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Cargo"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[Cargo]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar 1.Inputs[Entrada de ordenación].Columns[Fecha_Contrato]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Fecha_Contrato"
+                      lineageId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[Fecha_Contrato]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[EmpleadoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[EmpleadoID]"
+                      name="EmpleadoID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[EmpleadoID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[NombreEmpleado]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[NombreEmpleado]"
+                      name="NombreEmpleado">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[NombreEmpleado]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[Cargo]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[Cargo]"
+                      name="Cargo">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[Cargo]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[Fecha_Contrato]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación].Columns[Fecha_Contrato]"
+                      name="Fecha_Contrato">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB].Columns[Fecha_Contrato]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ETL DimEmpleado.Paths[Insertar nuevo empleado]"
+              endId="Package\ETL DimEmpleado\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+              name="Insertar nuevo empleado"
+              startId="Package\ETL DimEmpleado\División condicional.Outputs[Insertar nuevo empleado]" />
+            <path
+              refId="Package\ETL DimEmpleado.Paths[Salida de combinación de mezcla]"
+              endId="Package\ETL DimEmpleado\División condicional.Inputs[Entrada de división condicional]"
+              name="Salida de combinación de mezcla"
+              startId="Package\ETL DimEmpleado\Combinación de mezcla.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\ETL DimEmpleado.Paths[Salida de ordenación]"
+              endId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\ETL DimEmpleado\Ordenar.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\ETL DimEmpleado.Paths[Salida de ordenación1]"
+              endId="Package\ETL DimEmpleado\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\ETL DimEmpleado\Ordenar 1.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\ETL DimEmpleado.Paths[Salida de origen de OLE DB]"
+              endId="Package\ETL DimEmpleado\Ordenar.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\ETL DimEmpleado\Empleados.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\ETL DimEmpleado.Paths[Salida de origen de OLE DB1]"
+              endId="Package\ETL DimEmpleado\Ordenar 1.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\ETL DimEmpleado\DimEmpleados.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\ETL DimProducto"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Tarea Flujo de datos"
@@ -1672,12 +2904,6 @@
                       refId="Package\ETL DimProducto\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[PrecioUnitario]"
                       dataType="i4"
                       name="PrecioUnitario" />
-                    <externalMetadataColumn
-                      refId="Package\ETL DimProducto\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Descuento]"
-                      dataType="numeric"
-                      name="Descuento"
-                      precision="5"
-                      scale="2" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1792,7 +3018,7 @@
                       errorOrTruncationOperation="Conversión"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\ETL DimProducto\DimProductos.Outputs[Salida de origen de OLE DB].ExternalColumns[Categoria]"
-                      length="50"
+                      length="255"
                       lineageId="Package\ETL DimProducto\DimProductos.Outputs[Salida de origen de OLE DB].Columns[Categoria]"
                       name="Categoria"
                       truncationRowDisposition="FailComponent" />
@@ -2239,7 +3465,7 @@
                     <inputColumn
                       refId="Package\ETL DimProducto\Ordenar 1.Inputs[Entrada de ordenación].Columns[Categoria]"
                       cachedDataType="wstr"
-                      cachedLength="50"
+                      cachedLength="255"
                       cachedName="Categoria"
                       lineageId="Package\ETL DimProducto\DimProductos.Outputs[Salida de origen de OLE DB].Columns[Categoria]">
                       <properties>
@@ -2310,7 +3536,7 @@
                     <outputColumn
                       refId="Package\ETL DimProducto\Ordenar 1.Outputs[Salida de ordenación].Columns[Categoria]"
                       dataType="wstr"
-                      length="50"
+                      length="255"
                       lineageId="Package\ETL DimProducto\Ordenar 1.Outputs[Salida de ordenación].Columns[Categoria]"
                       name="Categoria">
                       <properties>
@@ -3460,6 +4686,1063 @@ FROM            categorias INNER JOIN
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ETL DimTiempo"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{4B383FF5-F485-41F6-960F-189D8287E7AE}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL DimTiempo"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ETL DimTiempo\Combinación de mezcla"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="Combinación de mezcla"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[venta_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[fecha]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[TiempoID]"
+                      cachedDataType="i4"
+                      cachedName="TiempoID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimTiempo\Ordenar 1.Outputs[Salida de ordenación].Columns[TiempoID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[venta_id]"
+                      name="venta_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[venta_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[TiempoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[TiempoID]"
+                      name="TiempoID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[TiempoID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha]"
+                      name="fecha">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[fecha]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimTiempo\Destino de OLE DB"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="Destino de OLE DB"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[DimTiempo]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimTiempo\Destino de OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha]"
+                      lineageId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[TiempoID]"
+                      lineageId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[venta_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[TiempoID]"
+                      dataType="i4"
+                      name="TiempoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha]"
+                      dataType="dbTimeStamp"
+                      name="Fecha" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimTiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimTiempo\DimTiempo"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="DimTiempo"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[DimTiempo]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimTiempo\DimTiempo.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].Columns[TiempoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[TiempoID]"
+                      lineageId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].Columns[TiempoID]"
+                      name="TiempoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].Columns[Fecha]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha]"
+                      lineageId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].Columns[Fecha]"
+                      name="Fecha"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[TiempoID]"
+                      dataType="i4"
+                      name="TiempoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha]"
+                      dataType="dbTimeStamp"
+                      name="Fecha" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB].Columns[TiempoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB].Columns[TiempoID]"
+                      name="TiempoID" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB].Columns[Fecha]"
+                      name="Fecha" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimTiempo\División condicional"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="División condicional"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL DimTiempo\División condicional.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\División condicional.Inputs[Entrada de división condicional].Columns[TiempoID]"
+                      cachedDataType="i4"
+                      cachedName="TiempoID"
+                      lineageId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[TiempoID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimTiempo\División condicional.Outputs[Insertar tiempo de venta]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Insertar tiempo de venta"
+                  synchronousInputId="Package\ETL DimTiempo\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">[ISNULL](#{Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[TiempoID]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(TiempoID)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL DimTiempo\División condicional.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\ETL DimTiempo\División condicional.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL DimTiempo\División condicional.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\ETL DimTiempo\División condicional.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimTiempo\Ordenar"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[venta_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación].Columns[vendedor_id]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_id"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[vendedor_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[cliente_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación].Columns[sucursal_id]"
+                      cachedDataType="i4"
+                      cachedName="sucursal_id"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[sucursal_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación].Columns[fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[fecha]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación].Columns[tipo_documento]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="tipo_documento"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[tipo_documento]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación].Columns[numero_documento]"
+                      cachedDataType="i4"
+                      cachedName="numero_documento"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[numero_documento]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[venta_id]"
+                      name="venta_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[venta_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[vendedor_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[vendedor_id]"
+                      name="vendedor_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[vendedor_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[cliente_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[cliente_id]"
+                      name="cliente_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[cliente_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[sucursal_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[sucursal_id]"
+                      name="sucursal_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[sucursal_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[fecha]"
+                      name="fecha">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[fecha]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[tipo_documento]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[tipo_documento]"
+                      name="tipo_documento">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[tipo_documento]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[numero_documento]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación].Columns[numero_documento]"
+                      name="numero_documento">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[numero_documento]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimTiempo\Ordenar 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimTiempo\Ordenar 1.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar 1.Inputs[Entrada de ordenación].Columns[TiempoID]"
+                      cachedDataType="i4"
+                      cachedName="TiempoID"
+                      lineageId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].Columns[TiempoID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimTiempo\Ordenar 1.Inputs[Entrada de ordenación].Columns[Fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Fecha"
+                      lineageId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].Columns[Fecha]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimTiempo\Ordenar 1.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar 1.Outputs[Salida de ordenación].Columns[TiempoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ordenar 1.Outputs[Salida de ordenación].Columns[TiempoID]"
+                      name="TiempoID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].Columns[TiempoID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ordenar 1.Outputs[Salida de ordenación].Columns[Fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimTiempo\Ordenar 1.Outputs[Salida de ordenación].Columns[Fecha]"
+                      name="Fecha">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB].Columns[Fecha]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimTiempo\Ventas"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Ventas"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[ventas]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimTiempo\Ventas.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.Albarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[venta_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[venta_id]"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[venta_id]"
+                      name="venta_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[vendedor_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[vendedor_id]"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[vendedor_id]"
+                      name="vendedor_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[cliente_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[cliente_id]"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[cliente_id]"
+                      name="cliente_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[sucursal_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[sucursal_id]"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[sucursal_id]"
+                      name="sucursal_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[fecha]"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[fecha]"
+                      name="fecha"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[tipo_documento]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[tipo_documento]"
+                      length="255"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[tipo_documento]"
+                      name="tipo_documento"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[numero_documento]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[numero_documento]"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].Columns[numero_documento]"
+                      name="numero_documento"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[venta_id]"
+                      dataType="i4"
+                      name="venta_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[vendedor_id]"
+                      dataType="i4"
+                      name="vendedor_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[cliente_id]"
+                      dataType="i4"
+                      name="cliente_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[sucursal_id]"
+                      dataType="i4"
+                      name="sucursal_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[fecha]"
+                      dataType="dbTimeStamp"
+                      name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[tipo_documento]"
+                      dataType="wstr"
+                      length="255"
+                      name="tipo_documento" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[numero_documento]"
+                      dataType="i4"
+                      name="numero_documento" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[venta_id]"
+                      name="venta_id" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[vendedor_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[vendedor_id]"
+                      name="vendedor_id" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[cliente_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[cliente_id]"
+                      name="cliente_id" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[sucursal_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[sucursal_id]"
+                      name="sucursal_id" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[fecha]"
+                      name="fecha" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[tipo_documento]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[tipo_documento]"
+                      name="tipo_documento" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[numero_documento]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[numero_documento]"
+                      name="numero_documento" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimTiempo\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ETL DimTiempo.Paths[Insertar tiempo de venta]"
+              endId="Package\ETL DimTiempo\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+              name="Insertar tiempo de venta"
+              startId="Package\ETL DimTiempo\División condicional.Outputs[Insertar tiempo de venta]" />
+            <path
+              refId="Package\ETL DimTiempo.Paths[Salida de combinación de mezcla]"
+              endId="Package\ETL DimTiempo\División condicional.Inputs[Entrada de división condicional]"
+              name="Salida de combinación de mezcla"
+              startId="Package\ETL DimTiempo\Combinación de mezcla.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\ETL DimTiempo.Paths[Salida de ordenación]"
+              endId="Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\ETL DimTiempo\Ordenar.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\ETL DimTiempo.Paths[Salida de ordenación1]"
+              endId="Package\ETL DimTiempo\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\ETL DimTiempo\Ordenar 1.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\ETL DimTiempo.Paths[Salida de origen de OLE DB]"
+              endId="Package\ETL DimTiempo\Ordenar.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\ETL DimTiempo\Ventas.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\ETL DimTiempo.Paths[Salida de origen de OLE DB1]"
+              endId="Package\ETL DimTiempo\Ordenar 1.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\ETL DimTiempo\DimTiempo.Outputs[Salida de origen de OLE DB]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -3478,6 +5761,22 @@ FROM            categorias INNER JOIN
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\ETL DimProducto" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7BA1558C-968A-47D1-88BB-69DD21C39FA2}"
+      DTS:From="Package\ETL DimProducto"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\ETL DimEmpleado" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{9EFD9E2D-6636-4AE9-B6ED-5E932DAA5081}"
+      DTS:From="Package\ETL DimEmpleado"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\ETL DimTiempo" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -3490,11 +5789,15 @@ FROM            categorias INNER JOIN
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="151,42"
           Id="Package\ETL DimCliente"
           TopLeft="72,75" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\ETL DimProducto"
+          TopLeft="213,239" />
         <NodeLayout
           Size="158,42"
           Id="Package\ETL DimSucursal"
@@ -3533,10 +5836,6 @@ FROM            categorias INNER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="160,42"
-          Id="Package\ETL DimProducto"
-          TopLeft="213,239" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="210,203">
@@ -3563,6 +5862,82 @@ FROM            categorias INNER JOIN
                     Point3="83,22" />
                   <mssgle:LineSegment
                     End="83,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="165,42"
+          Id="Package\ETL DimEmpleado"
+          TopLeft="258,329" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="293,281">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.5,48"
+              Start="0,0"
+              End="47.5,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="43.5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="43.5,24"
+                    Point2="47.5,24"
+                    Point3="47.5,28" />
+                  <mssgle:LineSegment
+                    End="47.5,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153,42"
+          Id="Package\ETL DimTiempo"
+          TopLeft="324,402" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="340.5,371">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="60,31"
+              Start="0,0"
+              End="60,23.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.5"
+                    Point2="0,15.5"
+                    Point3="4,15.5" />
+                  <mssgle:LineSegment
+                    End="56,15.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="56,15.5"
+                    Point2="60,15.5"
+                    Point3="60,19.5" />
+                  <mssgle:LineSegment
+                    End="60,23.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3808,6 +6183,221 @@ FROM            categorias INNER JOIN
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
+    design-time-name="Package\ETL DimProducto">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="125,42"
+          Id="Package\ETL DimProducto\Productos"
+          TopLeft="129,106" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\ETL DimProducto\División condicional"
+          TopLeft="257,403" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\ETL DimProducto\Destino de OLE DB"
+          TopLeft="262,496" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\ETL DimProducto\Ordenar 1"
+          TopLeft="389,194" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\ETL DimProducto\Ordenar"
+          TopLeft="129,197" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\ETL DimProducto\Combinación de mezcla"
+          TopLeft="248,304" />
+        <EdgeLayout
+          Id="Package\ETL DimProducto.Paths[Salida de ordenación1]"
+          TopLeft="452,236">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-78.6666666666667,68"
+              Start="0,0"
+              End="-78.6666666666667,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.4592901878914" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.4592901878914"
+                    Point2="0,40.4592901878914"
+                    Point3="-4,40.4592901878914" />
+                  <mssgle:LineSegment
+                    End="-74.6666666666667,40.4592901878914" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-74.6666666666667,40.4592901878914"
+                    Point2="-78.6666666666667,40.4592901878914"
+                    Point3="-78.6666666666667,44.4592901878914" />
+                  <mssgle:LineSegment
+                    End="-78.6666666666667,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimProducto.Paths[Salida de ordenación]"
+          TopLeft="187.5,239">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="125.166666666667,65"
+              Start="0,0"
+              End="125.166666666667,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.6743215031315" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.6743215031315"
+                    Point2="0,38.6743215031315"
+                    Point3="4,38.6743215031315" />
+                  <mssgle:LineSegment
+                    End="121.166666666667,38.6743215031315" />
+                  <mssgle:CubicBezierSegment
+                    Point1="121.166666666667,38.6743215031315"
+                    Point2="125.166666666667,38.6743215031315"
+                    Point3="125.166666666667,42.6743215031315" />
+                  <mssgle:LineSegment
+                    End="125.166666666667,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimProducto.Paths[Salida de combinación de mezcla]"
+          TopLeft="342.75,346">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57"
+              Start="0,0"
+              End="0,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimProducto.Paths[Insertar producto]"
+          TopLeft="344.25,445">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-39.1336328125,15.9453125,78.267265625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimProducto.Paths[Salida de origen de OLE DB]"
+          TopLeft="189.5,148">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="144,42"
+          Id="Package\ETL DimProducto\DimProductos"
+          TopLeft="376,116" />
+        <EdgeLayout
+          Id="Package\ETL DimProducto.Paths[Salida de origen de OLE DB1]"
+          TopLeft="450,158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimProducto\Productos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimProducto\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\ETL DimSucursal">
     <LayoutInfo>
       <GraphLayout
@@ -4041,40 +6631,40 @@ FROM            categorias INNER JOIN
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\ETL DimProducto">
+    design-time-name="Package\ETL DimEmpleado">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="125,42"
-          Id="Package\ETL DimProducto\Productos"
-          TopLeft="129,106" />
+          Size="168,42"
+          Id="Package\ETL DimEmpleado\Destino de OLE DB"
+          TopLeft="270,459" />
         <NodeLayout
-          Size="144,42"
-          Id="Package\ETL DimProducto\DimProductos"
-          TopLeft="380,103" />
+          Size="130,42"
+          Id="Package\ETL DimEmpleado\Empleados"
+          TopLeft="149,113" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\ETL DimEmpleado\DimEmpleados"
+          TopLeft="407,116" />
         <NodeLayout
           Size="117,42"
-          Id="Package\ETL DimProducto\Ordenar"
-          TopLeft="129,197" />
-        <NodeLayout
-          Size="126,42"
-          Id="Package\ETL DimProducto\Ordenar 1"
-          TopLeft="389,194" />
+          Id="Package\ETL DimEmpleado\Ordenar"
+          TopLeft="155,208" />
         <EdgeLayout
-          Id="Package\ETL DimProducto.Paths[Salida de origen de OLE DB]"
-          TopLeft="189.5,148">
+          Id="Package\ETL DimEmpleado.Paths[Salida de origen de OLE DB]"
+          TopLeft="213.75,155">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,49"
+              EndConnector="0,53"
               Start="0,0"
-              End="0,41.5">
+              End="0,45.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,41.5" />
+                    End="0,45.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4083,20 +6673,24 @@ FROM            categorias INNER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="126,42"
+          Id="Package\ETL DimEmpleado\Ordenar 1"
+          TopLeft="424,201" />
         <EdgeLayout
-          Id="Package\ETL DimProducto.Paths[Salida de origen de OLE DB1]"
-          TopLeft="452,145">
+          Id="Package\ETL DimEmpleado.Paths[Salida de origen de OLE DB1]"
+          TopLeft="484.25,158">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,49"
+              EndConnector="0,43"
               Start="0,0"
-              End="0,41.5">
+              End="0,35.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,41.5" />
+                    End="0,35.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4107,38 +6701,38 @@ FROM            categorias INNER JOIN
         </EdgeLayout>
         <NodeLayout
           Size="190,42"
-          Id="Package\ETL DimProducto\Combinación de mezcla"
-          TopLeft="248,304" />
+          Id="Package\ETL DimEmpleado\Combinación de mezcla"
+          TopLeft="254,300" />
         <NodeLayout
           Size="171,42"
-          Id="Package\ETL DimProducto\División condicional"
-          TopLeft="257,403" />
+          Id="Package\ETL DimEmpleado\División condicional"
+          TopLeft="267,379" />
         <EdgeLayout
-          Id="Package\ETL DimProducto.Paths[Salida de ordenación]"
-          TopLeft="187.5,239">
+          Id="Package\ETL DimEmpleado.Paths[Salida de ordenación]"
+          TopLeft="213.5,250">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="125.166666666667,65"
+              EndConnector="135.5,50"
               Start="0,0"
-              End="125.166666666667,57.5">
+              End="135.5,42.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.6743215031315" />
+                    End="0,21" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,34.6743215031315"
-                    Point2="0,38.6743215031315"
-                    Point3="4,38.6743215031315" />
+                    Point1="0,21"
+                    Point2="0,25"
+                    Point3="4,25" />
                   <mssgle:LineSegment
-                    End="121.166666666667,38.6743215031315" />
+                    End="131.5,25" />
                   <mssgle:CubicBezierSegment
-                    Point1="121.166666666667,38.6743215031315"
-                    Point2="125.166666666667,38.6743215031315"
-                    Point3="125.166666666667,42.6743215031315" />
+                    Point1="131.5,25"
+                    Point2="135.5,25"
+                    Point3="135.5,29" />
                   <mssgle:LineSegment
-                    End="125.166666666667,57.5" />
+                    End="135.5,42.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4148,31 +6742,31 @@ FROM            categorias INNER JOIN
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\ETL DimProducto.Paths[Salida de ordenación1]"
-          TopLeft="452,236">
+          Id="Package\ETL DimEmpleado.Paths[Salida de ordenación1]"
+          TopLeft="487,243">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-78.6666666666667,68"
+              EndConnector="-107.666666666667,57"
               Start="0,0"
-              End="-78.6666666666667,60.5">
+              End="-107.666666666667,49.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,36.4592901878914" />
+                    End="0,29.9144050104384" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,36.4592901878914"
-                    Point2="0,40.4592901878914"
-                    Point3="-4,40.4592901878914" />
+                    Point1="0,29.9144050104384"
+                    Point2="0,33.9144050104384"
+                    Point3="-4,33.9144050104384" />
                   <mssgle:LineSegment
-                    End="-74.6666666666667,40.4592901878914" />
+                    End="-103.666666666667,33.9144050104384" />
                   <mssgle:CubicBezierSegment
-                    Point1="-74.6666666666667,40.4592901878914"
-                    Point2="-78.6666666666667,40.4592901878914"
-                    Point3="-78.6666666666667,44.4592901878914" />
+                    Point1="-103.666666666667,33.9144050104384"
+                    Point2="-107.666666666667,33.9144050104384"
+                    Point3="-107.666666666667,37.9144050104384" />
                   <mssgle:LineSegment
-                    End="-78.6666666666667,60.5" />
+                    End="-107.666666666667,49.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4182,19 +6776,19 @@ FROM            categorias INNER JOIN
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\ETL DimProducto.Paths[Salida de combinación de mezcla]"
-          TopLeft="342.75,346">
+          Id="Package\ETL DimEmpleado.Paths[Salida de combinación de mezcla]"
+          TopLeft="350.75,342">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,57"
+              EndConnector="0,37"
               Start="0,0"
-              End="0,49.5">
+              End="0,29.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,49.5" />
+                    End="0,29.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4203,31 +6797,27 @@ FROM            categorias INNER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="168,42"
-          Id="Package\ETL DimProducto\Destino de OLE DB"
-          TopLeft="262,496" />
         <EdgeLayout
-          Id="Package\ETL DimProducto.Paths[Insertar producto]"
-          TopLeft="344.25,445">
+          Id="Package\ETL DimEmpleado.Paths[Insertar nuevo empleado]"
+          TopLeft="353.25,421">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,51"
+              EndConnector="0,38"
               Start="0,0"
-              End="0,43.5">
+              End="0,30.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,43.5" />
+                    End="0,30.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-39.1336328125,15.9453125,78.267265625,11.609375"
+              BoundingBox="-56.0636328125,9.4453125,112.127265625,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -4235,10 +6825,41 @@ FROM            categorias INNER JOIN
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\ETL DimProducto\Productos">
+    design-time-name="Package\ETL DimEmpleado\Destino de OLE DB">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimEmpleado\Empleados">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimEmpleado\DimEmpleados">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -4255,8 +6876,228 @@ FROM            categorias INNER JOIN
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\ETL DimTiempo">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="111,42"
+          Id="Package\ETL DimTiempo\Ventas"
+          TopLeft="21,23" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\ETL DimTiempo\DimTiempo"
+          TopLeft="227,27" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\ETL DimTiempo\Destino de OLE DB"
+          TopLeft="123,383" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\ETL DimTiempo\Ordenar"
+          TopLeft="18,114" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\ETL DimTiempo\Ordenar 1"
+          TopLeft="235,120" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\ETL DimTiempo\Combinación de mezcla"
+          TopLeft="113,210" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\ETL DimTiempo\División condicional"
+          TopLeft="119,292" />
+        <EdgeLayout
+          Id="Package\ETL DimTiempo.Paths[Salida de origen de OLE DB]"
+          TopLeft="76.5,65">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimTiempo.Paths[Salida de origen de OLE DB1]"
+          TopLeft="295.75,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51"
+              Start="0,0"
+              End="0,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimTiempo.Paths[Salida de ordenación]"
+          TopLeft="76.5,156">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.5,54"
+              Start="0,0"
+              End="131.5,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23"
+                    Point2="0,27"
+                    Point3="4,27" />
+                  <mssgle:LineSegment
+                    End="127.5,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="127.5,27"
+                    Point2="131.5,27"
+                    Point3="131.5,31" />
+                  <mssgle:LineSegment
+                    End="131.5,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimTiempo.Paths[Salida de ordenación1]"
+          TopLeft="298,162">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-59.6666666666667,48"
+              Start="0,0"
+              End="-59.6666666666667,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5594989561587" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5594989561587"
+                    Point2="0,28.5594989561587"
+                    Point3="-4,28.5594989561587" />
+                  <mssgle:LineSegment
+                    End="-55.6666666666667,28.5594989561587" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-55.6666666666667,28.5594989561587"
+                    Point2="-59.6666666666667,28.5594989561587"
+                    Point3="-59.6666666666667,32.5594989561587" />
+                  <mssgle:LineSegment
+                    End="-59.6666666666667,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimTiempo.Paths[Salida de combinación de mezcla]"
+          TopLeft="206.25,252">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimTiempo.Paths[Insertar tiempo de venta]"
+          TopLeft="205.75,334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.2899609375,14.9453125,110.579921875,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\ETL DimProducto\Destino de OLE DB">
+    design-time-name="Package\ETL DimTiempo\Ventas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimTiempo\DimTiempo">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimTiempo\Destino de OLE DB">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
