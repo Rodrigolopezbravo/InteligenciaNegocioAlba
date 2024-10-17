@@ -11,8 +11,8 @@
   DTS:LocaleID="3082"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{CFE3A3CA-A334-4508-85AB-4783D47CD67C}">
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{CBB189BF-B7CE-46EE-9F10-E174802387B1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -5743,6 +5743,1881 @@ FROM            categorias INNER JOIN
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ETL DimVentas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarea Flujo de datos"
+      DTS:DTSID="{2FAA345C-F9F4-4E38-A7E7-09F1EF2E2D27}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ETL DimVentas"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\ETL DimVentas\Combinación de mezcla"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="Combinación de mezcla"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[venta_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[vendedor_id]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_id"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[vendedor_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[cliente_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[sucursal_id]"
+                      cachedDataType="i4"
+                      cachedName="sucursal_id"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[sucursal_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[fecha]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimVentas\Ordenar 1.Outputs[Salida de ordenación].Columns[producto_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[venta_id]"
+                      name="venta_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[venta_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[vendedor_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[vendedor_id]"
+                      name="vendedor_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[vendedor_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_id]"
+                      name="cliente_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[cliente_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[sucursal_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[sucursal_id]"
+                      name="sucursal_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[sucursal_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha]"
+                      name="fecha">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla].Columns[fecha]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_id]"
+                      name="producto_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla].Columns[producto_id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\Combinación de mezcla 1"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Combinación de mezcla;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Combina dos flujos de datos ordenados en uno solo mediante la combinación FULL, LEFT o INNER. Se recomienda esta transformación cuando se pueden ordenar los flujos de datos en sus orígenes."
+              name="Combinación de mezcla 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el tipo de combinación que se debe realizar."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número de columnas de la clave de ordenación."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores NULL se tratan como valores iguales."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indica la cantidad máxima solicitada de búferes por entrada antes del bloqueo."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada izquierda de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[venta_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[vendedor_id]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_id"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[vendedor_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[cliente_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[sucursal_id]"
+                      cachedDataType="i4"
+                      cachedName="sucursal_id"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[sucursal_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[fecha]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[producto_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada derecha de combinación de mezcla]"
+                  hasSideEffects="true"
+                  name="Entrada derecha de combinación de mezcla">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada derecha de combinación de mezcla].Columns[VentaID]"
+                      cachedDataType="i4"
+                      cachedName="VentaID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[VentaID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla]"
+                  isSorted="true"
+                  name="Salida de combinación de mezcla">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[venta_id]"
+                      name="venta_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[venta_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[vendedor_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[vendedor_id]"
+                      name="vendedor_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[vendedor_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[cliente_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[cliente_id]"
+                      name="cliente_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[cliente_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[sucursal_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[sucursal_id]"
+                      name="sucursal_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[sucursal_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[fecha]"
+                      name="fecha">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[fecha]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[producto_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[producto_id]"
+                      name="producto_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla].Columns[producto_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[VentaID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[VentaID]"
+                      name="VentaID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="La columna de entrada asociada a esta columna de salida"
+                          name="InputColumnID">#{Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada derecha de combinación de mezcla].Columns[VentaID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\DimHechoVenta"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino de OLE DB"
+              name="DimHechoVenta"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[HechoVenta]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimVentas\DimHechoVenta.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB]"
+                  errorOrTruncationOperation="Insertar"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[VentaID]"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[venta_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[ProductoID]"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[producto_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[ClienteID]"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[cliente_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].Columns[vendedor_id]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_id"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[EmpleadoID]"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[vendedor_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].Columns[sucursal_id]"
+                      cachedDataType="i4"
+                      cachedName="sucursal_id"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[SucursalID]"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[sucursal_id]" />
+                    <inputColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].Columns[VentaID]"
+                      cachedDataType="i4"
+                      cachedName="VentaID"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[TiempoID]"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[VentaID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[VentaID]"
+                      dataType="i4"
+                      name="VentaID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[ProductoID]"
+                      dataType="i4"
+                      name="ProductoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[ClienteID]"
+                      dataType="i4"
+                      name="ClienteID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[EmpleadoID]"
+                      dataType="i4"
+                      name="EmpleadoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[SucursalID]"
+                      dataType="i4"
+                      name="SucursalID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[TiempoID]"
+                      dataType="i4"
+                      name="TiempoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[MontoVenta]"
+                      dataType="i4"
+                      name="MontoVenta" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB].ExternalColumns[CantidadVendida]"
+                      dataType="i4"
+                      name="CantidadVendida" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\DimHechoVenta.Outputs[Salida de error de destino de OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de OLE DB"
+                  synchronousInputId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVenta.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVenta.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVenta.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\DimHechoVentas"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="DimHechoVentas"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[HechoVenta]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimVentas\DimHechoVentas.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.DimAlbarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[VentaID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[VentaID]"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[VentaID]"
+                      name="VentaID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[ProductoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[ProductoID]"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[ProductoID]"
+                      name="ProductoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[ClienteID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[ClienteID]"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[ClienteID]"
+                      name="ClienteID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[EmpleadoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[EmpleadoID]"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[EmpleadoID]"
+                      name="EmpleadoID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[SucursalID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[SucursalID]"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[SucursalID]"
+                      name="SucursalID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[TiempoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[TiempoID]"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[TiempoID]"
+                      name="TiempoID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[VentaID]"
+                      dataType="i4"
+                      name="VentaID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[ProductoID]"
+                      dataType="i4"
+                      name="ProductoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[ClienteID]"
+                      dataType="i4"
+                      name="ClienteID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[EmpleadoID]"
+                      dataType="i4"
+                      name="EmpleadoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[SucursalID]"
+                      dataType="i4"
+                      name="SucursalID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[TiempoID]"
+                      dataType="i4"
+                      name="TiempoID" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[MontoVenta]"
+                      dataType="i4"
+                      name="MontoVenta" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].ExternalColumns[CantidadVendida]"
+                      dataType="i4"
+                      name="CantidadVendida" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[VentaID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[VentaID]"
+                      name="VentaID" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[ProductoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[ProductoID]"
+                      name="ProductoID" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[ClienteID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[ClienteID]"
+                      name="ClienteID" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[EmpleadoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[EmpleadoID]"
+                      name="EmpleadoID" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[SucursalID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[SucursalID]"
+                      name="SucursalID" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[TiempoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[TiempoID]"
+                      name="TiempoID" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\División condicional"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="División condicional;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+              description="Enruta filas de datos a diferentes salidas según el contenido de los datos. Se usan condiciones (expresiones de SSIS) para especificar las filas que se van a enrutar. Por ejemplo, se usa para separar los registros que deben limpiarse de los registros listos para ser cargados o para enrutar solamente un subconjunto de registros."
+              name="División condicional"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\ETL DimVentas\División condicional.Inputs[Entrada de división condicional]"
+                  description="Entrada en la transformación División condicional"
+                  name="Entrada de división condicional">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\División condicional.Inputs[Entrada de división condicional].Columns[VentaID]"
+                      cachedDataType="i4"
+                      cachedName="VentaID"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[VentaID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\División condicional.Outputs[Insertar Hecho venta]"
+                  description="Salida 1 de la transformación División condicional"
+                  errorOrTruncationOperation="Cálculo"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Insertar Hecho venta"
+                  synchronousInputId="Package\ETL DimVentas\División condicional.Inputs[Entrada de división condicional]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la expresión. Esta versión de expresión usa identificadores de linaje en lugar de nombres de columna."
+                      name="Expression">[ISNULL](#{Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla].Columns[VentaID]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Especifica la versión descriptiva de la expresión. Esta versión de expresión usa nombres de columna."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(VentaID)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la posición de la condición en la lista de condiciones que evalúa la transformación. El orden de evaluación es del menor al mayor valor."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL DimVentas\División condicional.Outputs[Salida predeterminada de división condicional]"
+                  description="Salida predeterminada de la transformación División condicional"
+                  exclusionGroup="1"
+                  name="Salida predeterminada de división condicional"
+                  synchronousInputId="Package\ETL DimVentas\División condicional.Inputs[Entrada de división condicional]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\ETL DimVentas\División condicional.Outputs[Salida de error de división condicional]"
+                  description="Salida de error de la transformación División condicional"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de división condicional"
+                  synchronousInputId="Package\ETL DimVentas\División condicional.Inputs[Entrada de división condicional]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\División condicional.Outputs[Salida de error de división condicional].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\Ordenar"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimVentas\Ordenar.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Inputs[Entrada de ordenación].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[venta_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Inputs[Entrada de ordenación].Columns[vendedor_id]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_id"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[vendedor_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Inputs[Entrada de ordenación].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[cliente_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Inputs[Entrada de ordenación].Columns[sucursal_id]"
+                      cachedDataType="i4"
+                      cachedName="sucursal_id"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[sucursal_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Inputs[Entrada de ordenación].Columns[fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[fecha]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[venta_id]"
+                      name="venta_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[venta_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[vendedor_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[vendedor_id]"
+                      name="vendedor_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[vendedor_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[cliente_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[cliente_id]"
+                      name="cliente_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[cliente_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[sucursal_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[sucursal_id]"
+                      name="sucursal_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[sucursal_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación].Columns[fecha]"
+                      name="fecha">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[fecha]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\Ordenar 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimVentas\Ordenar 1.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 1.Inputs[Entrada de ordenación].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      lineageId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].Columns[producto_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\Ordenar 1.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 1.Outputs[Salida de ordenación].Columns[producto_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 1.Outputs[Salida de ordenación].Columns[producto_id]"
+                      name="producto_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].Columns[producto_id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\Ordenar 2"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar 2"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimVentas\Ordenar 2.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Inputs[Entrada de ordenación].Columns[venta_id]"
+                      cachedDataType="i4"
+                      cachedName="venta_id"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[venta_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Inputs[Entrada de ordenación].Columns[vendedor_id]"
+                      cachedDataType="i4"
+                      cachedName="vendedor_id"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[vendedor_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Inputs[Entrada de ordenación].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Inputs[Entrada de ordenación].Columns[sucursal_id]"
+                      cachedDataType="i4"
+                      cachedName="sucursal_id"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[sucursal_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Inputs[Entrada de ordenación].Columns[fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Inputs[Entrada de ordenación].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      lineageId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_id]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[venta_id]"
+                      name="venta_id"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[venta_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[vendedor_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[vendedor_id]"
+                      name="vendedor_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[vendedor_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[cliente_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[cliente_id]"
+                      name="cliente_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[cliente_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[sucursal_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[sucursal_id]"
+                      name="sucursal_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[sucursal_id]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[fecha]"
+                      name="fecha">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[fecha]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[producto_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación].Columns[producto_id]"
+                      name="producto_id">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla].Columns[producto_id]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\Ordenar 3"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Ordenar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;1"
+              description="Ordena los datos de entrada de manera ascendente o descendente cuando no es posible ordenarlos en su origen. Por ejemplo, se ordenan los datos de ventas por 'id. de cliente' antes de que se escriban en un archivo plano y se entreguen a otro departamento. Nota: no se recomienda realizar esta transformación para grandes flujos de datos."
+              name="Ordenar 3"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si la transformación Ordenar quita filas con valores de ordenación duplicados."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el número máximo de subprocesos que se deben usar para la ordenación."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\ETL DimVentas\Ordenar 3.Inputs[Entrada de ordenación]"
+                  name="Entrada de ordenación">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Inputs[Entrada de ordenación].Columns[VentaID]"
+                      cachedDataType="i4"
+                      cachedName="VentaID"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[VentaID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Inputs[Entrada de ordenación].Columns[ProductoID]"
+                      cachedDataType="i4"
+                      cachedName="ProductoID"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[ProductoID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Inputs[Entrada de ordenación].Columns[ClienteID]"
+                      cachedDataType="i4"
+                      cachedName="ClienteID"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[ClienteID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Inputs[Entrada de ordenación].Columns[EmpleadoID]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoID"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[EmpleadoID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Inputs[Entrada de ordenación].Columns[SucursalID]"
+                      cachedDataType="i4"
+                      cachedName="SucursalID"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[SucursalID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Inputs[Entrada de ordenación].Columns[TiempoID]"
+                      cachedDataType="i4"
+                      cachedName="TiempoID"
+                      lineageId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[TiempoID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica las opciones de comparación para datos de caracteres."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica el criterio de ordenación de la columna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación]"
+                  isSorted="true"
+                  name="Salida de ordenación">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[VentaID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[VentaID]"
+                      name="VentaID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[VentaID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[ProductoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[ProductoID]"
+                      name="ProductoID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[ProductoID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[ClienteID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[ClienteID]"
+                      name="ClienteID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[ClienteID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[EmpleadoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[EmpleadoID]"
+                      name="EmpleadoID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[EmpleadoID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[SucursalID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[SucursalID]"
+                      name="SucursalID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[SucursalID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[TiempoID]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación].Columns[TiempoID]"
+                      name="TiempoID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica el identificador de linaje de la columna de entrada que está asociada a esta columna de salida."
+                          name="SortColumnId">#{Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB].Columns[TiempoID]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\Producto"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Producto"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[productos]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimVentas\Producto.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.Albarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].Columns[producto_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].ExternalColumns[producto_id]"
+                      lineageId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].Columns[producto_id]"
+                      name="producto_id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].ExternalColumns[producto_id]"
+                      dataType="i4"
+                      name="producto_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].ExternalColumns[nombre]"
+                      dataType="wstr"
+                      length="255"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].ExternalColumns[precio]"
+                      dataType="i4"
+                      name="precio" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].ExternalColumns[descripcion]"
+                      dataType="wstr"
+                      length="255"
+                      name="descripcion" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB].ExternalColumns[categoria_id]"
+                      dataType="i4"
+                      name="categoria_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ETL DimVentas\Producto.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de error de origen de OLE DB].Columns[producto_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Producto.Outputs[Salida de error de origen de OLE DB].Columns[producto_id]"
+                      name="producto_id" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Producto.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Producto.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Producto.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\ETL DimVentas\Ventas"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+              description="Origen de OLE DB"
+              name="Ventas"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowset">[dbo].[ventas]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Comando SQL para ejecutar."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="Variable que contiene el comando SQL para ejecutar."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="Asignaciones entre los parámetros del comando SQL y las variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\ETL DimVentas\Ventas.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.Albarran]"
+                  description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB]"
+                  name="Salida de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[venta_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[venta_id]"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[venta_id]"
+                      name="venta_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[vendedor_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[vendedor_id]"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[vendedor_id]"
+                      name="vendedor_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[cliente_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[cliente_id]"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[cliente_id]"
+                      name="cliente_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[sucursal_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[sucursal_id]"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[sucursal_id]"
+                      name="sucursal_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[fecha]"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].Columns[fecha]"
+                      name="fecha"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[venta_id]"
+                      dataType="i4"
+                      name="venta_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[vendedor_id]"
+                      dataType="i4"
+                      name="vendedor_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[cliente_id]"
+                      dataType="i4"
+                      name="cliente_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[sucursal_id]"
+                      dataType="i4"
+                      name="sucursal_id" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[fecha]"
+                      dataType="dbTimeStamp"
+                      name="fecha" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[tipo_documento]"
+                      dataType="wstr"
+                      length="255"
+                      name="tipo_documento" />
+                    <externalMetadataColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB].ExternalColumns[numero_documento]"
+                      dataType="i4"
+                      name="numero_documento" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de OLE DB">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[venta_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[venta_id]"
+                      name="venta_id" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[vendedor_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[vendedor_id]"
+                      name="vendedor_id" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[cliente_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[cliente_id]"
+                      name="cliente_id" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[sucursal_id]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[sucursal_id]"
+                      name="sucursal_id" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[fecha]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[fecha]"
+                      name="fecha" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\ETL DimVentas\Ventas.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de combinación de mezcla]"
+              endId="Package\ETL DimVentas\División condicional.Inputs[Entrada de división condicional]"
+              name="Salida de combinación de mezcla"
+              startId="Package\ETL DimVentas\Combinación de mezcla 1.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de combinación de mezcla1]"
+              endId="Package\ETL DimVentas\Ordenar 2.Inputs[Entrada de ordenación]"
+              name="Salida de combinación de mezcla"
+              startId="Package\ETL DimVentas\Combinación de mezcla.Outputs[Salida de combinación de mezcla]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de ordenación]"
+              endId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\ETL DimVentas\Ordenar.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de ordenación1]"
+              endId="Package\ETL DimVentas\Combinación de mezcla.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\ETL DimVentas\Ordenar 1.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de ordenación2]"
+              endId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada derecha de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\ETL DimVentas\Ordenar 3.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de ordenación3]"
+              endId="Package\ETL DimVentas\Combinación de mezcla 1.Inputs[Entrada izquierda de combinación de mezcla]"
+              name="Salida de ordenación"
+              startId="Package\ETL DimVentas\Ordenar 2.Outputs[Salida de ordenación]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de origen de OLE DB]"
+              endId="Package\ETL DimVentas\Ordenar.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\ETL DimVentas\Ventas.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de origen de OLE DB1]"
+              endId="Package\ETL DimVentas\Ordenar 1.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\ETL DimVentas\Producto.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida de origen de OLE DB2]"
+              endId="Package\ETL DimVentas\Ordenar 3.Inputs[Entrada de ordenación]"
+              name="Salida de origen de OLE DB"
+              startId="Package\ETL DimVentas\DimHechoVentas.Outputs[Salida de origen de OLE DB]" />
+            <path
+              refId="Package\ETL DimVentas.Paths[Salida predeterminada de división condicional]"
+              endId="Package\ETL DimVentas\DimHechoVenta.Inputs[Entrada de destino de OLE DB]"
+              name="Salida predeterminada de división condicional"
+              startId="Package\ETL DimVentas\División condicional.Outputs[Salida predeterminada de división condicional]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -5777,6 +7652,14 @@ FROM            categorias INNER JOIN
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
       DTS:To="Package\ETL DimTiempo" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{097E4ADA-A4B9-4D2A-954B-84E01E534D81}"
+      DTS:From="Package\ETL DimTiempo"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\ETL DimVentas" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -5795,6 +7678,10 @@ FROM            categorias INNER JOIN
           Id="Package\ETL DimCliente"
           TopLeft="72,75" />
         <NodeLayout
+          Size="165,42"
+          Id="Package\ETL DimEmpleado"
+          TopLeft="258,329" />
+        <NodeLayout
           Size="160,42"
           Id="Package\ETL DimProducto"
           TopLeft="213,239" />
@@ -5802,6 +7689,10 @@ FROM            categorias INNER JOIN
           Size="158,42"
           Id="Package\ETL DimSucursal"
           TopLeft="131,161" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\ETL DimTiempo"
+          TopLeft="324,402" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="147.5,117">
@@ -5870,10 +7761,6 @@ FROM            categorias INNER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="165,42"
-          Id="Package\ETL DimEmpleado"
-          TopLeft="258,329" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="293,281">
@@ -5908,10 +7795,6 @@ FROM            categorias INNER JOIN
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="153,42"
-          Id="Package\ETL DimTiempo"
-          TopLeft="324,402" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
           TopLeft="340.5,371">
@@ -5938,6 +7821,44 @@ FROM            categorias INNER JOIN
                     Point3="60,19.5" />
                   <mssgle:LineSegment
                     End="60,23.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="150,42"
+          Id="Package\ETL DimVentas"
+          TopLeft="380,480" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="400.5,444">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="54.5,36"
+              Start="0,0"
+              End="54.5,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14"
+                    Point2="0,18"
+                    Point3="4,18" />
+                  <mssgle:LineSegment
+                    End="50.5,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="50.5,18"
+                    Point2="54.5,18"
+                    Point3="54.5,22" />
+                  <mssgle:LineSegment
+                    End="54.5,28.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6025,7 +7946,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6047,7 +7970,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6081,7 +8006,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6115,7 +8042,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6137,7 +8066,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -6183,10 +8114,257 @@ FROM            categorias INNER JOIN
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
+    design-time-name="Package\ETL DimEmpleado">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\ETL DimEmpleado\División condicional"
+          TopLeft="267,379" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\ETL DimEmpleado\Destino de OLE DB"
+          TopLeft="270,459" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\ETL DimEmpleado\Empleados"
+          TopLeft="149,113" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\ETL DimEmpleado\Ordenar"
+          TopLeft="155,208" />
+        <NodeLayout
+          Size="126,42"
+          Id="Package\ETL DimEmpleado\Ordenar 1"
+          TopLeft="424,201" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\ETL DimEmpleado\DimEmpleados"
+          TopLeft="407,116" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\ETL DimEmpleado\Combinación de mezcla"
+          TopLeft="254,300" />
+        <EdgeLayout
+          Id="Package\ETL DimEmpleado.Paths[Salida de origen de OLE DB1]"
+          TopLeft="484.25,158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimEmpleado.Paths[Salida de origen de OLE DB]"
+          TopLeft="213.75,155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimEmpleado.Paths[Salida de ordenación1]"
+          TopLeft="487,243">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-107.666666666667,57"
+              Start="0,0"
+              End="-107.666666666667,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.9144050104384" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.9144050104384"
+                    Point2="0,33.9144050104384"
+                    Point3="-4,33.9144050104384" />
+                  <mssgle:LineSegment
+                    End="-103.666666666667,33.9144050104384" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-103.666666666667,33.9144050104384"
+                    Point2="-107.666666666667,33.9144050104384"
+                    Point3="-107.666666666667,37.9144050104384" />
+                  <mssgle:LineSegment
+                    End="-107.666666666667,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimEmpleado.Paths[Salida de ordenación]"
+          TopLeft="213.5,250">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="135.5,50"
+              Start="0,0"
+              End="135.5,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21"
+                    Point2="0,25"
+                    Point3="4,25" />
+                  <mssgle:LineSegment
+                    End="131.5,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="131.5,25"
+                    Point2="135.5,25"
+                    Point3="135.5,29" />
+                  <mssgle:LineSegment
+                    End="135.5,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimEmpleado.Paths[Salida de combinación de mezcla]"
+          TopLeft="350.75,342">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37"
+              Start="0,0"
+              End="0,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimEmpleado.Paths[Insertar nuevo empleado]"
+          TopLeft="353.25,421">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-56.0636328125,9.4453125,112.127265625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimEmpleado\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimEmpleado\Empleados">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimEmpleado\DimEmpleados">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\ETL DimProducto">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="144,42"
+          Id="Package\ETL DimProducto\DimProductos"
+          TopLeft="376,116" />
         <NodeLayout
           Size="125,42"
           Id="Package\ETL DimProducto\Productos"
@@ -6211,6 +8389,30 @@ FROM            categorias INNER JOIN
           Size="190,42"
           Id="Package\ETL DimProducto\Combinación de mezcla"
           TopLeft="248,304" />
+        <EdgeLayout
+          Id="Package\ETL DimProducto.Paths[Salida de origen de OLE DB]"
+          TopLeft="189.5,148">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\ETL DimProducto.Paths[Salida de ordenación1]"
           TopLeft="452,236">
@@ -6242,7 +8444,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6276,7 +8480,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6298,7 +8504,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6326,32 +8534,6 @@ FROM            categorias INNER JOIN
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\ETL DimProducto.Paths[Salida de origen de OLE DB]"
-          TopLeft="189.5,148">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,49"
-              Start="0,0"
-              End="0,41.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="144,42"
-          Id="Package\ETL DimProducto\DimProductos"
-          TopLeft="376,116" />
-        <EdgeLayout
           Id="Package\ETL DimProducto.Paths[Salida de origen de OLE DB1]"
           TopLeft="450,158">
           <EdgeLayout.Curve>
@@ -6370,12 +8552,27 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimProducto\DimProductos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\ETL DimProducto\Productos">
     <Properties>
@@ -6461,7 +8658,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6495,7 +8694,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6517,7 +8718,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6563,7 +8766,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -6585,7 +8790,9 @@ FROM            categorias INNER JOIN
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -6631,256 +8838,18 @@ FROM            categorias INNER JOIN
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\ETL DimEmpleado">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="168,42"
-          Id="Package\ETL DimEmpleado\Destino de OLE DB"
-          TopLeft="270,459" />
-        <NodeLayout
-          Size="130,42"
-          Id="Package\ETL DimEmpleado\Empleados"
-          TopLeft="149,113" />
-        <NodeLayout
-          Size="149,42"
-          Id="Package\ETL DimEmpleado\DimEmpleados"
-          TopLeft="407,116" />
-        <NodeLayout
-          Size="117,42"
-          Id="Package\ETL DimEmpleado\Ordenar"
-          TopLeft="155,208" />
-        <EdgeLayout
-          Id="Package\ETL DimEmpleado.Paths[Salida de origen de OLE DB]"
-          TopLeft="213.75,155">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,53"
-              Start="0,0"
-              End="0,45.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,45.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="126,42"
-          Id="Package\ETL DimEmpleado\Ordenar 1"
-          TopLeft="424,201" />
-        <EdgeLayout
-          Id="Package\ETL DimEmpleado.Paths[Salida de origen de OLE DB1]"
-          TopLeft="484.25,158">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,43"
-              Start="0,0"
-              End="0,35.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="190,42"
-          Id="Package\ETL DimEmpleado\Combinación de mezcla"
-          TopLeft="254,300" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\ETL DimEmpleado\División condicional"
-          TopLeft="267,379" />
-        <EdgeLayout
-          Id="Package\ETL DimEmpleado.Paths[Salida de ordenación]"
-          TopLeft="213.5,250">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="135.5,50"
-              Start="0,0"
-              End="135.5,42.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21"
-                    Point2="0,25"
-                    Point3="4,25" />
-                  <mssgle:LineSegment
-                    End="131.5,25" />
-                  <mssgle:CubicBezierSegment
-                    Point1="131.5,25"
-                    Point2="135.5,25"
-                    Point3="135.5,29" />
-                  <mssgle:LineSegment
-                    End="135.5,42.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\ETL DimEmpleado.Paths[Salida de ordenación1]"
-          TopLeft="487,243">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-107.666666666667,57"
-              Start="0,0"
-              End="-107.666666666667,49.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.9144050104384" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.9144050104384"
-                    Point2="0,33.9144050104384"
-                    Point3="-4,33.9144050104384" />
-                  <mssgle:LineSegment
-                    End="-103.666666666667,33.9144050104384" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-103.666666666667,33.9144050104384"
-                    Point2="-107.666666666667,33.9144050104384"
-                    Point3="-107.666666666667,37.9144050104384" />
-                  <mssgle:LineSegment
-                    End="-107.666666666667,49.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\ETL DimEmpleado.Paths[Salida de combinación de mezcla]"
-          TopLeft="350.75,342">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,37"
-              Start="0,0"
-              End="0,29.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\ETL DimEmpleado.Paths[Insertar nuevo empleado]"
-          TopLeft="353.25,421">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38"
-              Start="0,0"
-              End="0,30.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-56.0636328125,9.4453125,112.127265625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\ETL DimEmpleado\Destino de OLE DB">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\ETL DimEmpleado\Empleados">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\ETL DimEmpleado\DimEmpleados">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\ETL DimProducto\DimProductos">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
     design-time-name="Package\ETL DimTiempo">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="126,42"
+          Id="Package\ETL DimTiempo\Ordenar 1"
+          TopLeft="235,120" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\ETL DimTiempo\División condicional"
+          TopLeft="119,292" />
         <NodeLayout
           Size="111,42"
           Id="Package\ETL DimTiempo\Ventas"
@@ -6890,47 +8859,17 @@ FROM            categorias INNER JOIN
           Id="Package\ETL DimTiempo\DimTiempo"
           TopLeft="227,27" />
         <NodeLayout
-          Size="168,42"
-          Id="Package\ETL DimTiempo\Destino de OLE DB"
-          TopLeft="123,383" />
-        <NodeLayout
           Size="117,42"
           Id="Package\ETL DimTiempo\Ordenar"
           TopLeft="18,114" />
-        <NodeLayout
-          Size="126,42"
-          Id="Package\ETL DimTiempo\Ordenar 1"
-          TopLeft="235,120" />
         <NodeLayout
           Size="190,42"
           Id="Package\ETL DimTiempo\Combinación de mezcla"
           TopLeft="113,210" />
         <NodeLayout
-          Size="171,42"
-          Id="Package\ETL DimTiempo\División condicional"
-          TopLeft="119,292" />
-        <EdgeLayout
-          Id="Package\ETL DimTiempo.Paths[Salida de origen de OLE DB]"
-          TopLeft="76.5,65">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,49"
-              Start="0,0"
-              End="0,41.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="168,42"
+          Id="Package\ETL DimTiempo\Destino de OLE DB"
+          TopLeft="123,383" />
         <EdgeLayout
           Id="Package\ETL DimTiempo.Paths[Salida de origen de OLE DB1]"
           TopLeft="295.75,69">
@@ -6954,31 +8893,19 @@ FROM            categorias INNER JOIN
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\ETL DimTiempo.Paths[Salida de ordenación]"
-          TopLeft="76.5,156">
+          Id="Package\ETL DimTiempo.Paths[Salida de origen de OLE DB]"
+          TopLeft="76.5,65">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="131.5,54"
+              EndConnector="0,49"
               Start="0,0"
-              End="131.5,46.5">
+              End="0,41.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23"
-                    Point2="0,27"
-                    Point3="4,27" />
-                  <mssgle:LineSegment
-                    End="127.5,27" />
-                  <mssgle:CubicBezierSegment
-                    Point1="127.5,27"
-                    Point2="131.5,27"
-                    Point3="131.5,31" />
-                  <mssgle:LineSegment
-                    End="131.5,46.5" />
+                    End="0,41.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7013,6 +8940,40 @@ FROM            categorias INNER JOIN
                     Point3="-59.6666666666667,32.5594989561587" />
                   <mssgle:LineSegment
                     End="-59.6666666666667,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimTiempo.Paths[Salida de ordenación]"
+          TopLeft="76.5,156">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131.5,54"
+              Start="0,0"
+              End="131.5,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23"
+                    Point2="0,27"
+                    Point3="4,27" />
+                  <mssgle:LineSegment
+                    End="127.5,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="127.5,27"
+                    Point2="131.5,27"
+                    Point3="131.5,31" />
+                  <mssgle:LineSegment
+                    End="131.5,46.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7098,6 +9059,378 @@ FROM            categorias INNER JOIN
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\ETL DimTiempo\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\ETL DimVentas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="111,42"
+          Id="Package\ETL DimVentas\Ventas"
+          TopLeft="69,54" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\ETL DimVentas\DimHechoVenta"
+          TopLeft="485,497" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\ETL DimVentas\Producto"
+          TopLeft="214,55" />
+        <NodeLayout
+          Size="117,42"
+          Id="Package\ETL DimVentas\Ordenar"
+          TopLeft="71,153" />
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de origen de OLE DB]"
+          TopLeft="127,96">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57"
+              Start="0,0"
+              End="0,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="126,42"
+          Id="Package\ETL DimVentas\Ordenar 1"
+          TopLeft="218,153" />
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de origen de OLE DB1]"
+          TopLeft="277.75,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56"
+              Start="0,0"
+              End="0,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="190,42"
+          Id="Package\ETL DimVentas\Combinación de mezcla"
+          TopLeft="110,257" />
+        <NodeLayout
+          Size="159,42"
+          Id="Package\ETL DimVentas\DimHechoVentas"
+          TopLeft="350,256" />
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de ordenación]"
+          TopLeft="129.5,195">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.1666666666667,62"
+              Start="0,0"
+              End="45.1666666666667,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.8893528183716" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.8893528183716"
+                    Point2="0,36.8893528183716"
+                    Point3="4,36.8893528183716" />
+                  <mssgle:LineSegment
+                    End="41.1666666666667,36.8893528183716" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.1666666666667,36.8893528183716"
+                    Point2="45.1666666666667,36.8893528183716"
+                    Point3="45.1666666666667,40.8893528183716" />
+                  <mssgle:LineSegment
+                    End="45.1666666666667,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de ordenación1]"
+          TopLeft="281,195">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-45.6666666666667,62"
+              Start="0,0"
+              End="-45.6666666666667,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.8893528183716" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.8893528183716"
+                    Point2="0,36.8893528183716"
+                    Point3="-4,36.8893528183716" />
+                  <mssgle:LineSegment
+                    End="-41.6666666666667,36.8893528183716" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-41.6666666666667,36.8893528183716"
+                    Point2="-45.6666666666667,36.8893528183716"
+                    Point3="-45.6666666666667,40.8893528183716" />
+                  <mssgle:LineSegment
+                    End="-45.6666666666667,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="126,42"
+          Id="Package\ETL DimVentas\Ordenar 3"
+          TopLeft="360,352" />
+        <NodeLayout
+          Size="199,42"
+          Id="Package\ETL DimVentas\Combinación de mezcla 1"
+          TopLeft="217,424" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\ETL DimVentas\División condicional"
+          TopLeft="229,495" />
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida predeterminada de división condicional]"
+          TopLeft="400,517">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="85,0"
+              Start="0,0"
+              End="77.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="77.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de origen de OLE DB2]"
+          TopLeft="426.25,298">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de ordenación2]"
+          TopLeft="423,394">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-74.6666666666667,30"
+              Start="0,0"
+              End="-74.6666666666667,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.8564307078764" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.8564307078764"
+                    Point2="0,17.8564307078764"
+                    Point3="-4,17.8564307078764" />
+                  <mssgle:LineSegment
+                    End="-70.6666666666667,17.8564307078764" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-70.6666666666667,17.8564307078764"
+                    Point2="-74.6666666666667,17.8564307078764"
+                    Point3="-74.6666666666667,21.8564307078764" />
+                  <mssgle:LineSegment
+                    End="-74.6666666666667,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de combinación de mezcla]"
+          TopLeft="315.5,466">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="126,42"
+          Id="Package\ETL DimVentas\Ordenar 2"
+          TopLeft="142,348" />
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de combinación de mezcla1]"
+          TopLeft="205,299">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ETL DimVentas.Paths[Salida de ordenación3]"
+          TopLeft="205,390">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111.5,34"
+              Start="0,0"
+              End="111.5,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="4,17" />
+                  <mssgle:LineSegment
+                    End="107.5,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="107.5,17"
+                    Point2="111.5,17"
+                    Point3="111.5,21" />
+                  <mssgle:LineSegment
+                    End="111.5,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimVentas\Ventas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimVentas\DimHechoVenta">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimVentas\Producto">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ETL DimVentas\DimHechoVentas">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
